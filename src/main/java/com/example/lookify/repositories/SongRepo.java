@@ -13,6 +13,9 @@ public interface SongRepo extends CrudRepository<Song, Long> {
 	
 	List<Song> findAll();
 	
+	List<Song> findByArtistContaining(String artist);
+
+	
 	@Query(value = "SELECT * FROM songs", nativeQuery = true) 
 	List<Song> getTopTen();
 }

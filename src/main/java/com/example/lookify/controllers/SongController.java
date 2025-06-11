@@ -35,11 +35,12 @@ public class SongController {
 		model.addAttribute("songs", songs);
 		return "dashboard.jsp";
 	}
-	
 	@GetMapping("/search")
-	public String search() {
-		// TODO - finish later
-		return "dashboard.jsp";
+	public String search(@RequestParam("artist") String artist, Model model) {
+		List<Song> songs = songService.findSongsByArtist(artist);
+		model.addAttribute("songs", songs);
+		model.addAttribute("artist", artist);
+		return "search.jsp";
 	}
 	
 	@GetMapping("/songs/new")
@@ -65,7 +66,7 @@ public class SongController {
 	}
 	
 	@GetMapping("/top-ten")
-	public String details(Model model) {
+	public String topTenSongs(Model model) {
 		List<Song> songs = songService.topTen();
 		model.addAttribute("songs", songs);
 		return "top.jsp";
